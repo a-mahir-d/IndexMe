@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="IndexMe.Application/IndexMe.Application.csproj" />
+  <Project Path="IndexMe.Domain/IndexMe.Domain.csproj" />
+  <Project Path="IndexMe.Infrastructure/IndexMe.Infrastructure.csproj" />
+  <Project Path="IndexMe.WebAPI/IndexMe.WebAPI.csproj" />
+</Solution>
