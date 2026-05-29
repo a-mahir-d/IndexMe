@@ -14,7 +14,7 @@ public sealed class LoginUserCommandHandler(IUserRepository userRepository, IJwt
         if (!user.Password.Verify(request.Password)) return Result.Failure("INVALID_CREDENTIALS");
 
 
-        var token = jwtProvider.GenerateToken(user.Id, user.Email.Value);
+        var token = jwtProvider.GenerateToken(user.Id, user.Email.Value, user.Username.Value);
         return Result<string>.Success(token);
     }
 }
