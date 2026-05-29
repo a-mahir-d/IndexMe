@@ -3,4 +3,4 @@ using TS.MediatR;
 
 namespace IndexMe.Application.Features.Users.Commands.LoginUser;
 
-public record LoginUserCommand(string Email, string Password) : IRequest<Result>;
+public record LoginUserCommand(string Email, string Password) : IRequest<Result<string>>;

@@ -1,4 +1,5 @@
-﻿using IndexMe.Domain.Abstractions;
+﻿using IndexMe.Application.Services;
+using IndexMe.Domain.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using TS.MediatR;
@@ -13,6 +14,8 @@ public static class DependencyInjection
         {
             options.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly(), typeof(Entity<>).Assembly);
         });
+
+        services.AddScoped<TrimAndChopStringsService>();
 
         return services;
     }

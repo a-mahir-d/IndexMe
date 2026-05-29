@@ -5,13 +5,13 @@ using TS.MediatR;
 
 namespace IndexMe.Application.Features.Users.Commands.LoginUser;
 
-public sealed class LoginUserCommandHandler(IUserRepository userRepository, IJwtService jwtProvider) : IRequestHandler<LoginUserCommand, Result>
+public sealed class LoginUserCommandHandler(IUserRepository userRepository, IJwtService jwtProvider) : IRequestHandler<LoginUserCommand, Result<string>>
 {
-    public async Task<Result> Handle(LoginUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result<string>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetByEmailAsync(new Email(request.Email), cancellationToken);
-        if (user is null) return Result.Failure("INVALID_CREDENTIALS");
-        if (!user.Password.Verify(request.Password)) return Result.Failure("INVALID_CREDENTIALS");
+        if (user is null) return Result<string>.Failure("INVALID_CREDENTIALS");
+        if (!user.Password.Verify(request.Password)) return Result<string>.Failure("INVALID_CREDENTIALS");
 
 
         var token = jwtProvider.GenerateToken(user.Id, user.Email.Value, user.Username.Value);

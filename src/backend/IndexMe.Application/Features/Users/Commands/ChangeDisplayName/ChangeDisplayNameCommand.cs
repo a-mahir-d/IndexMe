@@ -3,4 +3,4 @@ using TS.MediatR;
 
 namespace IndexMe.Application.Features.Users.Commands.ChangeDisplayName;
 
-public record ChangDisplayNameCommand(string? NewDisplayName) : IRequest<Result>;
+public record ChangeDisplayNameCommand(string? NewDisplayName) : IRequest<Result>;

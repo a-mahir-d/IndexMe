@@ -1,4 +1,5 @@
-﻿using IndexMe.Domain.Abstractions;
+﻿using IndexMe.Application.Abstractions;
+using IndexMe.Domain.Abstractions;
 using IndexMe.Domain.Links;
 using IndexMe.Domain.Results;
 using IndexMe.Domain.Users;
@@ -6,12 +7,11 @@ using TS.MediatR;
 
 namespace IndexMe.Application.Features.Links.Commands.CreateLink;
 
-public sealed class CreateLinkCommandHandler(ILinkRepository linkRepository, IUserRepository userRepository, IUnitOfWork unitOfWork) : IRequestHandler<CreateLinkCommand, Result>
+public sealed class CreateLinkCommandHandler(ILinkRepository linkRepository, ICurrentUserProvider currentUser, IUserRepository userRepository, IUnitOfWork unitOfWork) : IRequestHandler<CreateLinkCommand, Result>
 {
     public async Task<Result> Handle(CreateLinkCommand request, CancellationToken cancellationToken)
     {
-        // var id = getFromToken
-        var id = Guid.CreateVersion7();
+        var id = currentUser.UserId;
         var user = await userRepository.GetByIdAsync(id, cancellationToken);
         if (user is null) return Result.Failure("USER_NOT_FOUND");
 

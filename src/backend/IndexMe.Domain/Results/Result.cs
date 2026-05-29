@@ -19,12 +19,13 @@ public class Result
 
 public class Result<T> : Result
 {
-    public T Value { get; }
+    public T Data { get; }
 
-    protected Result(T value, bool isSuccess, string error, string? logMessage = null) : base(isSuccess, error, logMessage)
+    protected Result(T data, bool isSuccess, string error, string? logMessage = null) : base(isSuccess, error, logMessage)
     {
-        Value = value;
+        Data = data;
     }
 
-    public static Result<T> Success(T value, string? logMessage = null) => new(value, true, string.Empty, logMessage);
+    public static Result<T> Success(T data, string? logMessage = null) => new(data, true, string.Empty, logMessage);
+    public static new Result<T> Failure(string error, string? logMessage = null) => new(default!, false, error, logMessage);
 }
