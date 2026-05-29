@@ -31,11 +31,11 @@ public sealed class Link : Entity<Guid>
     public User User { get; init; }
     public ICollection<LinkClick> Clicks { get; private set; }
 
-    public static Link Create(Guid userId, string title, string url, int displayOrder, User user)
+    public static Link Create(string title, string url, int displayOrder, User user)
     {
         return new Link(
             id: Guid.CreateVersion7(),
-            userId: userId,
+            userId: user.Id,
             title: title,
             url: new(url),
             displayOrder: displayOrder,
