@@ -5,7 +5,7 @@ using TS.MediatR;
 
 namespace IndexMe.Application.Features.Users.Commands.LoginUser;
 
-public sealed class LoginUserCommandHandler(IUserRepository userRepository, IJwtProvider jwtProvider) : IRequestHandler<LoginUserCommand, Result>
+public sealed class LoginUserCommandHandler(IUserRepository userRepository, IJwtService jwtProvider) : IRequestHandler<LoginUserCommand, Result>
 {
     public async Task<Result> Handle(LoginUserCommand request, CancellationToken cancellationToken)
     {

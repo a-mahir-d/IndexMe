@@ -13,7 +13,10 @@ public sealed class TrackClickCommandHandler(ILinkRepository linkRepository, ICl
         var link = await linkRepository.GetByIdAsync(request.LinkId, cancellationToken);
         if (link is null) return Result.Failure("LINK_NOT_FOUND");
 
-        var click = LinkClick.Create(linkId: link.Id, ipAddress: request.IpAddress, userAgent: request.UserAgent, link: link);
+        var ipAddress = "dummy"; // get from user context
+        var userAgent = "dummy"; // get from user context
+
+        var click = LinkClick.Create(linkId: link.Id, ipAddress: ipAddress, userAgent: userAgent, link: link);
 
         await clickChannel.WriteAsync(click, cancellationToken);
 

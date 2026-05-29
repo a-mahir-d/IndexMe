@@ -10,7 +10,7 @@ public sealed class User : Entity<Guid>
     [Obsolete("For EF Core use only", true)]
     private User() { }
 #pragma warning restore CS8618
-    private User(Guid id, Username username, Email email, Password password, string? displayName, string? bio, DateTime createdAt, bool isActive, ICollection<Link> links)
+    private User(Guid id, Username username, Email email, Password password, string? displayName, string? bio, DateTime createdAt, ICollection<Link> links)
     {
         Id = id;
         Username = username;
@@ -19,7 +19,6 @@ public sealed class User : Entity<Guid>
         DisplayName = displayName;
         Bio = bio;
         CreatedAt = createdAt;
-        IsActive = isActive;
         Links = links;
     }
 
@@ -29,7 +28,6 @@ public sealed class User : Entity<Guid>
     public string? DisplayName { get; private set; }
     public string? Bio { get; private set; }
     public DateTime CreatedAt { get; init; }
-    public bool IsActive { get; private set; }
     public ICollection<Link> Links { get; private set; }
 
     public static User Create(string username, string email, string password, string? displayName, string? bio)
@@ -42,7 +40,6 @@ public sealed class User : Entity<Guid>
             displayName: displayName,
             bio: bio,
             createdAt: DateTime.UtcNow,
-            isActive: true,
             links: []
         );
     }
@@ -51,5 +48,4 @@ public sealed class User : Entity<Guid>
     public void ChangePassword(string password) => Password = new(password, true);
     public void ChangeDisplayName(string? displayName) => DisplayName = displayName;
     public void ChangeBio(string? bio) => Bio = bio;
-    public void ChangeIsActiveStatus(bool isActive) => IsActive = isActive;
 }

@@ -4,6 +4,7 @@ using IndexMe.Infrastructure.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddOptions<JwtSettings>().BindConfiguration("Jwt").ValidateDataAnnotations().ValidateOnStart();
 builder.Services.AddOptions<DbSettings>().BindConfiguration("Db").ValidateDataAnnotations().ValidateOnStart();
 
 builder.Services.AddApplication();

@@ -1,4 +1,5 @@
-﻿using IndexMe.Application.Analytics;
+﻿using IndexMe.Application.Abstractions;
+using IndexMe.Application.Analytics;
 using IndexMe.Domain.Abstractions;
 using IndexMe.Domain.LinkClicks;
 using IndexMe.Domain.Links;
@@ -6,6 +7,7 @@ using IndexMe.Domain.Users;
 using IndexMe.Infrastructure.Analytics;
 using IndexMe.Infrastructure.Context;
 using IndexMe.Infrastructure.Repositories;
+using IndexMe.Infrastructure.Services;
 using IndexMe.Infrastructure.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +32,8 @@ public static class DependencyInjection
         services.AddScoped<ILinkClickRepository, LinkClickRepository>();
 
         services.AddSingleton<IClickChannel, ClickChannel>();
+
+        services.AddScoped<IJwtService, JwtService>();
 
         services.AddHostedService<ClickBackgroundWorker>();
         return services;

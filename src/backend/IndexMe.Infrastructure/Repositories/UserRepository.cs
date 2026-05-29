@@ -9,8 +9,14 @@ public sealed class UserRepository(IndexMeDbContext context) : IUserRepository
     public async Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         => await context.Users.FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
 
+    public async Task<User?> GetByIdWithLinksAsync(Guid id, CancellationToken cancellationToken = default)
+        => await context.Users.Include(u => u.Links).FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
+
     public async Task<User?> GetByUsernameAsync(Username username, CancellationToken cancellationToken = default)
         => await context.Users.FirstOrDefaultAsync(u => u.Username == username, cancellationToken);
+
+    public async Task<User?> GetByUsernameWithLinksAsync(Username username, CancellationToken cancellationToken = default)
+       => await context.Users.Include(u => u.Links).FirstOrDefaultAsync(u => u.Username == username, cancellationToken);
 
     public async Task<User?> GetByEmailAsync(Email email, CancellationToken cancellationToken = default)
         => await context.Users.FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
