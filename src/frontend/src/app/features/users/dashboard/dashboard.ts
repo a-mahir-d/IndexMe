@@ -18,46 +18,11 @@ export class Dashboard implements OnInit {
   loading = signal(true);
 
   ngOnInit() {
-    const dummyUser: UserDto = {
-      id: '550e8400-e29b-41d4-a716-446655440000',
-      username: 'ahmetmahir',
-      email: 'ahmet@example.com',
-      displayName: 'Ahmet Mahir Demirelli',
-      bio: 'Software Developer | .NET & Angular Enthusiast | Woodworking DIYer',
-      createdAt: new Date('2026-01-15T09:00:00Z'),
-      links: [
-        {
-          id: 'l1',
-          userId: '550e8400-e29b-41d4-a716-446655440000',
-          title: 'Portfolio Website',
-          url: 'https://ahmetmahirdemirelli.com',
-          displayOrder: 1,
-          createdAt: new Date(),
-          clickCount: 2
-        },
-        {
-          id: 'l2',
-          userId: '550e8400-e29b-41d4-a716-446655440000',
-          title: 'GitHub Profile',
-          url: 'https://github.com/ahmetmahirdemirelli',
-          displayOrder: 2,
-          createdAt: new Date(),
-          clickCount: 0
-        },
-        {
-          id: 'l3',
-          userId: '550e8400-e29b-41d4-a716-446655440000',
-          title: 'DIY Woodworking Blog',
-          url: 'https://diy.ahmetmahirdemirelli.com',
-          displayOrder: 3,
-          createdAt: new Date(),
-          clickCount: 15
-        }
-      ]
-    };
-
-    // Veriyi doğrudan atıyoruz
-    this.user.set(dummyUser);
-    this.loading.set(false);
+    this.userService.getMyInfo().subscribe({
+      next: (data) => {
+        this.user.set(data);
+        this.loading.set(false);
+      }
+    });
   }
 }

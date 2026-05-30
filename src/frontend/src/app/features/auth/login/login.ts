@@ -39,6 +39,7 @@ export class Login {
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
+        console.log(err)
         this.isLoading.set(false);
         this.errorMessage.set(this.langService.translate('login.errorInvalid'));
       }

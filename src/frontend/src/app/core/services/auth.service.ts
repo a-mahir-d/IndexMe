@@ -18,7 +18,7 @@ export class AuthService {
   public isAuthenticated = signal<boolean>(!!this.tokenSignal());
 
   login(credentials: LoginCredentials): Observable<string> {
-    return this.http.post<string>('/api/users/login', credentials, { responseType: 'json' }).pipe(
+    return this.http.post<string>('http://localhost:5000/api/users/login', credentials, { responseType: 'text' as 'json' }).pipe(
       tap((token) => {
         if (typeof window !== 'undefined') {
           localStorage.setItem(this.tokenKey, token);

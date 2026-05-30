@@ -8,6 +8,6 @@ export class UserService {
   private http = inject(HttpClient);
   
   getMyInfo(): Observable<UserDto> {
-    return this.http.get<UserDto>('/api/users/get-my-info');
+    return this.http.get<UserDto>('http://localhost:5000/api/users/get-my-info');
   }
 }
