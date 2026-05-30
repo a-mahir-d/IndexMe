@@ -1,14 +1,12 @@
 export interface LinkClickDto {
   id: string;
-  linkId: string;
   clickedAt: Date;
   ipAddress: string | null;
   userAgent: string | null;
 }
 
-export interface Link {
+export interface LinkDto {
   id: string;
-  userId: string;
   title: string;
   url: string;
   displayOrder: number;
@@ -23,5 +21,5 @@ export interface UserDto {
   displayName: string | null;
   bio: string | null;
   createdAt: Date;
-  links: Link[];
+  links: LinkDto[];
 }
