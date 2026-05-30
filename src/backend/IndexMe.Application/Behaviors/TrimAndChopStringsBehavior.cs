@@ -3,17 +3,6 @@ using TS.MediatR;
 
 namespace IndexMe.Application.Behaviors;
 
-public sealed class TrimAndChopStringsBehavior<TRequest> : IPipelineBehavior<TRequest> where TRequest : IRequest
-{
-    public TrimAndChopStringsBehavior() : base() { }
-
-    public async Task Handle(TRequest request, RequestHandlerDelegate next, CancellationToken cancellationToken)
-    {
-        TrimAndChopStringsService.TrimAndChop(request);
-        await next();
-    }
-}
-
 public sealed class TrimAndChopStringsBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
     public TrimAndChopStringsBehavior() : base() { }

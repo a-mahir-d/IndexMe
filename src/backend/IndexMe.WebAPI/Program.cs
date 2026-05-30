@@ -12,6 +12,8 @@ using TS.MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddMemoryCache();
+
 builder.Services.AddOptions<JwtSettings>().BindConfiguration("Jwt").ValidateDataAnnotations().ValidateOnStart();
 builder.Services.AddOptions<DbSettings>().BindConfiguration("Db").ValidateDataAnnotations().ValidateOnStart();
 builder.Services.AddOptions<ClientSettings>().BindConfiguration("Client").ValidateDataAnnotations().ValidateOnStart();
@@ -22,8 +24,9 @@ builder.Services.AddInfrastructure();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICurrentUserProvider, CurrentUserProvider>();
 
-builder.Services.AddTransient(typeof(IPipelineBehavior<>), typeof(TrimAndChopStringsBehavior<>));
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TrimAndChopStringsBehavior<,>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(DomainExceptionBehavior<,>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ResultLoggingBehavior<,>));
 
 builder.Services.AddControllers();
 
@@ -72,9 +75,11 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 if (app.Environment.IsProduction()) app.UseCors("ProductionPolicy");
 else app.UseCors("DevelopmentPolicy");
 
-app.UseMiddleware<RequestMetadataMiddleware>();
-
 app.UseAuthentication();
+
+app.UseMiddleware<RequestMetadataMiddleware>();
+app.UseMiddleware<RateLimitingMiddleware>();
+
 app.UseAuthorization();
 
 app.MapControllers();

@@ -25,8 +25,8 @@ public sealed class UserPublicDto
 
         return new UserPublicDto(
             userName: user.Username.Value,
-            displayName: user.DisplayName ?? user.Username.Value,
-            bio: user.Bio,
+            displayName: user.DisplayName?.Value ?? user.Username.Value,
+            bio: user.Bio?.Value,
             userLinksPublicDtos: userLinksPublicDtos
         );
     }

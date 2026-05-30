@@ -12,8 +12,8 @@ public sealed class LinkRepository(IndexMeDbContext context) : ILinkRepository
     public async Task<IEnumerable<Link>> GetByUserIdAsync(Guid userId, CancellationToken cancellationToken = default)
         => await context.Links.Where(l => l.UserId == userId).ToListAsync(cancellationToken);
 
-    public async Task<int> GetCountByUserIdAsync(Guid userId, CancellationToken cancellationToken = default)
-        => await context.Links.Where(l => l.UserId == userId).CountAsync(cancellationToken);
+    public async Task<byte> GetCountByUserIdAsync(Guid userId, CancellationToken cancellationToken = default)
+        => (byte)await context.Links.Where(l => l.UserId == userId).CountAsync(cancellationToken);
 
     public async Task AddAsync(Link link, CancellationToken cancellationToken = default)
         => await context.Links.AddAsync(link, cancellationToken);

@@ -20,7 +20,7 @@ public sealed class LinkPublicDto
     {
         return new LinkPublicDto(
             id: link.Id,
-            title: link.Title,
+            title: link.Title.Value,
             displayOrder: link.DisplayOrder
         );
     }

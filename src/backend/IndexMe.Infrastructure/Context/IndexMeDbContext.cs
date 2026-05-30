@@ -37,14 +37,44 @@ public sealed class IndexMeDbContext : DbContext, IUnitOfWork
             builder.Property(u => u.Password)
                 .HasConversion(p => p.Value, v => new Password(v, false))
                 .IsRequired();
+
+            builder.Property(u => u.DisplayName)
+                .HasConversion(
+                    dp => dp != null ? dp.Value : null,
+                    v => v != null ? new DisplayName(v) : null
+                )
+                .IsRequired(false);
+
+            builder.Property(u => u.Bio)
+                .HasConversion(
+                    b => b != null ? b.Value : null,
+                    v => v != null ? new Bio(v) : null
+                )
+                .IsRequired(false);
+
+            builder.Property(u => u.CreatedAt)
+                .IsRequired();
         });
 
         modelBuilder.Entity<Link>(builder =>
         {
             builder.HasKey(l => l.Id);
 
+            builder.Property(l => l.UserId)
+                .IsRequired();
+
+            builder.Property(l => l.Title)
+                .HasConversion(t => t.Value, v => new Title(v))
+                .IsRequired();
+
             builder.Property(l => l.Url)
                 .HasConversion(u => u.Value, v => new Url(v))
+                .IsRequired();
+
+            builder.Property(l => l.DisplayOrder)
+                .IsRequired();
+
+            builder.Property(u => u.CreatedAt)
                 .IsRequired();
 
             builder.HasOne(l => l.User)
@@ -56,6 +86,18 @@ public sealed class IndexMeDbContext : DbContext, IUnitOfWork
         modelBuilder.Entity<LinkClick>(builder =>
         {
             builder.HasKey(lc => lc.Id);
+
+            builder.Property(lc => lc.LinkId)
+                .IsRequired();
+
+            builder.Property(lc => lc.ClickedAt)
+                .IsRequired();
+
+            builder.Property(lc => lc.IpAddress)
+                .IsRequired(false);
+
+            builder.Property(lc => lc.UserAgent)
+                .IsRequired(false);
 
             builder.HasOne(lc => lc.Link)
                 .WithMany(l => l.Clicks)

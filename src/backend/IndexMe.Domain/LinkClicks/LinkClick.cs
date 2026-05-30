@@ -26,11 +26,11 @@ public sealed class LinkClick : Entity<Guid>
     public string? UserAgent { get; init; }
     public Link Link { get; init; }
 
-    public static LinkClick Create(Guid linkId, string? ipAddress, string? userAgent, Link link)
+    public static LinkClick Create(string? ipAddress, string? userAgent, Link link)
     {
         return new LinkClick(
             id: Guid.CreateVersion7(),
-            linkId: linkId,
+            linkId: link.Id,
             clickedAt: DateTime.UtcNow,
             ipAddress: ipAddress,
             userAgent: userAgent,

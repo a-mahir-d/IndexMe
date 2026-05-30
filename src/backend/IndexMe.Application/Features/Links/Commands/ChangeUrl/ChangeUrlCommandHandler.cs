@@ -13,7 +13,7 @@ public sealed class ChangeUrlCommandHandler(ILinkRepository linkRepository, ICur
         var link = await linkRepository.GetByIdAsync(request.LinkId, cancellationToken);
         if (link is null) return Result.Failure("LINK_NOT_FOUND");
 
-        var userId = currentUser.UserId
+        var userId = currentUser.UserId;
         if (link.UserId != userId) return Result.Failure("UNAUTHORIZED_ACCESS_ATTEMPT", $"UNAUTHORIZED_ACCESS_ATTEMPT | User(Id: {userId}) tried to change the url of the link(Id: {link.Id}) to {request.NewUrl}");
 
         link.ChangeUrl(request.NewUrl);

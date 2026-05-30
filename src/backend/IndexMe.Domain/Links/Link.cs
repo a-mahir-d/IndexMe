@@ -11,7 +11,7 @@ public sealed class Link : Entity<Guid>
     private Link() { }
 #pragma warning restore CS8618
 
-    private Link(Guid id, Guid userId, string title, Url url, int displayOrder, DateTime createdAt, User user, ICollection<LinkClick> clicks)
+    private Link(Guid id, Guid userId, Title title, Url url, byte displayOrder, DateTime createdAt, User user, ICollection<LinkClick> clicks)
     {
         Id = id;
         UserId = userId;
@@ -24,19 +24,19 @@ public sealed class Link : Entity<Guid>
     }
 
     public Guid UserId { get; init; }
-    public string Title { get; private set; }
+    public Title Title { get; private set; }
     public Url Url { get; private set; }
-    public int DisplayOrder { get; private set; }
+    public byte DisplayOrder { get; private set; }
     public DateTime CreatedAt { get; init; }
     public User User { get; init; }
     public ICollection<LinkClick> Clicks { get; private set; }
 
-    public static Link Create(string title, string url, int displayOrder, User user)
+    public static Link Create(string title, string url, byte displayOrder, User user)
     {
         return new Link(
             id: Guid.CreateVersion7(),
             userId: user.Id,
-            title: title,
+            title: new(title),
             url: new(url),
             displayOrder: displayOrder,
             createdAt: DateTime.UtcNow,
@@ -45,7 +45,7 @@ public sealed class Link : Entity<Guid>
         );
     }
 
-    public void ChangeTitle(string title) => Title = title;
+    public void ChangeTitle(string title) => Title = new(title);
     public void ChangeUrl(string url) => Url = new(url);
-    public void ChangeDisplayOrder(int displayOrder) => DisplayOrder = displayOrder;
+    public void ChangeDisplayOrder(byte displayOrder) => DisplayOrder = displayOrder;
 }

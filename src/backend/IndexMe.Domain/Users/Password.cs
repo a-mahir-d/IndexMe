@@ -1,4 +1,6 @@
-﻿namespace IndexMe.Domain.Users;
+﻿using IndexMe.Domain.Exceptions;
+
+namespace IndexMe.Domain.Users;
 
 public sealed record Password
 {
@@ -7,12 +9,12 @@ public sealed record Password
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            throw new ArgumentException("Şifre alanı boş olamaz");
+            throw new DomainValidationException("Şifre alanı boş olamaz");
         }
 
         if (value.Length < 6)
         {
-            throw new ArgumentException("Şifre alanı 6 karakterden daha kısa olamaz");
+            throw new DomainValidationException("Şifre alanı 6 karakterden daha kısa olamaz");
         }
 
         Value = hash ? PasswordHasher.Hash(value) : value;

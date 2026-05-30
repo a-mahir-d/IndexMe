@@ -15,9 +15,9 @@ public sealed class TrackClickQueryHandler(ILinkRepository linkRepository, ICurr
         if (link is null) return Result<string>.Failure("LINK_NOT_FOUND");
 
         var ipAddress = currentUser.Ip;
-        var userAgent = "dummy"; // get from user context
+        var userAgent = currentUser.UserAgent;
 
-        var click = LinkClick.Create(linkId: link.Id, ipAddress: ipAddress, userAgent: userAgent, link: link);
+        var click = LinkClick.Create(ipAddress, userAgent, link);
 
         await clickChannel.WriteAsync(click, cancellationToken);
 

@@ -4,7 +4,7 @@ namespace IndexMe.Application.Services;
 
 internal sealed class TrimAndChopStringsService
 {
-    private const int MaxLength = 300;
+    private const int MaxLength = 3000;
     public static void TrimAndChop(object request)
     {
         if (request is null) return;

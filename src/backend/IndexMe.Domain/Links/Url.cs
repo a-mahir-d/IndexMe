@@ -1,4 +1,6 @@
-﻿namespace IndexMe.Domain.Links;
+﻿using IndexMe.Domain.Exceptions;
+
+namespace IndexMe.Domain.Links;
 
 public sealed record Url
 {
@@ -10,19 +12,19 @@ public sealed record Url
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            throw new ArgumentException("URL_CANNOT_BE_EMPTY");
+            throw new DomainValidationException("URL_CANNOT_BE_EMPTY");
         }
 
         string trimmedUrl = value.Trim();
 
         if (trimmedUrl.Length > MaxLength)
         {
-            throw new ArgumentException($"URL_CANNOT_BE_LONGER_THAN_{MaxLength}_CHARACTERS");
+            throw new DomainValidationException($"URL_CANNOT_BE_LONGER_THAN_{MaxLength}_CHARACTERS");
         }
 
         if (!Uri.TryCreate(trimmedUrl, UriKind.Absolute, out Uri? uriResult) || (uriResult.Scheme != Uri.UriSchemeHttp && uriResult.Scheme != Uri.UriSchemeHttps))
         {
-            throw new ArgumentException("URL_INVALID_FORMAT_OR_SCHEME");
+            throw new DomainValidationException("URL_INVALID_FORMAT_OR_SCHEME");
         }
 
         Value = uriResult.AbsoluteUri;

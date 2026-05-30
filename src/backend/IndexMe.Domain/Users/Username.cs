@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using IndexMe.Domain.Exceptions;
+using System.Text.RegularExpressions;
 
 namespace IndexMe.Domain.Users;
 
@@ -11,22 +12,22 @@ public sealed record Username
     {
         if (string.IsNullOrEmpty(value))
         {
-            throw new ArgumentException("USERNAME_CANNOT_BE_EMPTY");
+            throw new DomainValidationException("USERNAME_CANNOT_BE_EMPTY");
         }
 
         if (value.Length < 6)
         {
-            throw new ArgumentException("USERNAME_CANNOT_BE_SHORTER_THEN_6_CHARACTERS");
+            throw new DomainValidationException("USERNAME_CANNOT_BE_SHORTER_THEN_6_CHARACTERS");
         }
 
         if (value.Length > MaxLength)
         {
-            throw new ArgumentException($"USERNAME_CANNOT_BE_LONGER_THAN_{MaxLength}_CHARACTERS");
+            throw new DomainValidationException($"USERNAME_CANNOT_BE_LONGER_THAN_{MaxLength}_CHARACTERS");
         }
 
         if (!UsernamePattern.IsMatch(value))
         {
-            throw new ArgumentException("USERNAME_CAN_ONLY_CONTAIN_LOWERCASE_LETTERS_NUMBERS_AND_UNDERSCORES");
+            throw new DomainValidationException("USERNAME_CAN_ONLY_CONTAIN_LOWERCASE_LETTERS_NUMBERS_AND_UNDERSCORES");
         }
 
         Value = value;
