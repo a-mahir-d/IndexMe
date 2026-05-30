@@ -1,0 +1,50 @@
+{
+  "navbar": {
+    "features": "Özellikler",
+    "aboutUs": "Hakkımızda",
+    "login": "Giriş Yap",
+    "register": "Kayıt Ol"
+  },
+  "footer": {
+    "copyright": "Tüm hakları saklıdır."
+  },
+  "home": {
+    "title": "Tüm bağlantılarınız tek bir",
+    "titleHighlight": "linkte.",
+    "subtitle": "Kitlenizi tüm platformlarınızda tek bir basit bağlantıyla yönlendirin. Profilinizi saniyeler içinde oluşturun.",
+    "placeholder": "kullaniciadi",
+    "cta": "Sayfanı Oluştur"
+  },
+  "register": {
+    "title": "Kayıtlar Geçici Olarak Kapalıdır",
+    "message": "Bu proje bir portfolyo/CV çalışması olduğu için doğrudan kullanıcı kaydı alınmamaktadır. Sistemi test etmek için kullanabileceğiniz hazır giriş bilgilerine aşağıdaki bağlantı üzerinden erişebilirsiniz.",
+    "cta": "Giriş Bilgilerini Al",
+    "backHome": "Ana Sayfaya Dön"
+  },
+  "login": {
+    "title": "Tekrar Hoş Geldiniz",
+    "subtitle": "Hesabınıza erişmek için bilgilerinizi girin",
+    "emailLabel": "E-posta Adresi",
+    "emailPlaceholder": "ornek@indexme.com",
+    "passwordLabel": "Şifre",
+    "submitCta": "Giriş Yap",
+    "errorEmail": "Lütfen geçerli bir e-posta adresi girin.",
+    "errorPassword": "Şifre alanı zorunludur (en az 6 karakter).",
+    "errorInvalid": "E-posta veya şifre hatalı."
+  },
+  "features": {
+    "mainTitle": "İhtiyacınız Olan Tüm Güç",
+    "mainSubtitle": "IndexMe ile profilinizi optimize edin ve kitlenizle olan etkileşiminizi tamamen ücretsiz bir şekilde takip etmeye başlayın.",
+    "freeTitle": "Ömür Boyu Ücretsiz",
+    "freeDesc": "Gizli ücretler veya abonelikler yok. Profilinizi oluşturun ve ömür boyu hiçbir ücret ödemeden tüm temel özellikleri kullanın.",
+    "linksTitle": "30 Adet Bağlantı",
+    "linksDesc": "Sosyal medya hesaplarınızı, projelerinizi ve web sitelerinizi tek bir yerde toplamanız için tam 30 adet aktif link kapasitesi.",
+    "clicksTitle": "500 Tıklama Analizi",
+    "clicksDesc": "Hangi bağlantının daha çok dikkat çektiğini görün. Her linkiniz için 500 adede kadar tıklama verisini gerçek zamanlı takip edin."
+  },
+  "dashboard": {
+    "linksTitle": "Bağlantılarınız",
+    "clicksLabel": "Tıklanma",
+    "noLinks": "Henüz hiç bağlantı eklemediniz."
+  }
+}

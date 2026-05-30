@@ -1,0 +1,50 @@
+{
+  "navbar": {
+    "features": "Features",
+    "aboutUs": "About Us",
+    "login": "Login",
+    "register": "Register"
+  },
+  "footer": {
+    "copyright": "All rights reserved."
+  },
+  "home": {
+    "title": "Everything you are in one single",
+    "titleHighlight": "link.",
+    "subtitle": "Link to everything you create, share, and sell from a single biolink. Set up your page in seconds.",
+    "placeholder": "username",
+    "cta": "Claim Your Page"
+  },
+  "register": {
+    "title": "Registration is Closed",
+    "message": "Because this platform functions as a showcase/CV project, direct registration is disabled. You can instantly generate sandbox credentials to explore the system at the link below.",
+    "cta": "Get Demo Credentials",
+    "backHome": "Return to Home"
+  },
+  "login": {
+    "title": "Welcome Back",
+    "subtitle": "Enter your credentials to access your account",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "name@indexme.com",
+    "passwordLabel": "Password",
+    "submitCta": "Sign In",
+    "errorEmail": "Please enter a valid email address.",
+    "errorPassword": "Password is required (min 6 characters).",
+    "errorInvalid": "Invalid email or password combination."
+  },
+  "features": {
+    "mainTitle": "All the Power You Need",
+    "mainSubtitle": "Optimize your profile with IndexMe and start tracking your audience engagement completely for free.",
+    "freeTitle": "Free Forever",
+    "freeDesc": "No hidden fees, no subscriptions. Create your page and enjoy all core features lifetime without paying a dime.",
+    "linksTitle": "30 Active Links",
+    "linksDesc": "Ample capacity of up to 30 custom links to gather your social media, side projects, and websites in one unified space.",
+    "clicksTitle": "500 Clicks Analytics",
+    "clicksDesc": "Discover what captures attention. Track up to 500 visitor click events for every single link in real-time."
+  },
+  "dashboard": {
+    "linksTitle": "Your Links",
+    "clicksLabel": "Clicks",
+    "noLinks": "You haven't added any links yet."
+  }
+}

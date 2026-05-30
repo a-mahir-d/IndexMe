@@ -1,0 +1,60 @@
+<div class="min-h-[calc(100vh-8rem)] bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex items-center py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight mb-4">
+        {{ langService.translate('features.mainTitle') }}
+      </h2>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 font-medium">
+        {{ langService.translate('features.mainSubtitle') }}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      
+      <div class="flex flex-col p-6 bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs transition-transform duration-300 hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">
+          {{ langService.translate('features.freeTitle') }}
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+          {{ langService.translate('features.freeDesc') }}
+        </p>
+      </div>
+
+      <div class="flex flex-col p-6 bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs transition-transform duration-300 hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-5">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.143m0-3.429l3.536-3.536m-2.122-2.122a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.142"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">
+          {{ langService.translate('features.linksTitle') }}
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+          {{ langService.translate('features.linksDesc') }}
+        </p>
+      </div>
+
+      <div class="flex flex-col p-6 bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs transition-transform duration-300 hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-5">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">
+          {{ langService.translate('features.clicksTitle') }}
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+          {{ langService.translate('features.clicksDesc') }}
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
