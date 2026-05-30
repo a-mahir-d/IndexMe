@@ -7,6 +7,7 @@ using IndexMe.Infrastructure.Settings;
 using IndexMe.WebAPI.Middlewares;
 using IndexMe.WebAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using TS.MediatR;
 
@@ -36,6 +37,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
         var rsaKey = RsaKeyLoader.LoadPublicKey(jwtSettings!.PublicKeyPath);
 
+        options.MapInboundClaims = false;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -44,7 +46,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             ValidIssuer = jwtSettings.Issuer,
             ValidAudience = jwtSettings.Audience,
-            IssuerSigningKey = rsaKey
+            IssuerSigningKey = rsaKey,
+            NameClaimType = JwtRegisteredClaimNames.Sub
         };
     }
 );
