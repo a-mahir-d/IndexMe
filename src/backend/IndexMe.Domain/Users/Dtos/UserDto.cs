@@ -26,13 +26,15 @@ public sealed class UserDto
 
     public static UserDto Create(User user)
     {
+        var linkDtos = user.Links.Select(l => LinkDto.Create(l)).ToList();
+
         return new UserDto(
             userName: user.Username.Value,
             email: user.Email.Value,
             displayName: user.DisplayName?.Value,
             bio: user.Bio?.Value,
             createdAt: user.CreatedAt,
-            links: user.Links
+            links: linkDtos
         );
     }
 }
