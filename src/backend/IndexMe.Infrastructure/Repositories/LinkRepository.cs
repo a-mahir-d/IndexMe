@@ -1,4 +1,5 @@
 ﻿using IndexMe.Domain.Links;
+using IndexMe.Domain.Links.Dtos;
 using IndexMe.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,17 @@ public sealed class LinkRepository(IndexMeDbContext context) : ILinkRepository
 
     public async Task<byte> GetCountByUserIdAsync(Guid userId, CancellationToken cancellationToken = default)
         => (byte)await context.Links.Where(l => l.UserId == userId).CountAsync(cancellationToken);
+
+    public async Task<List<LinkClickCountDto>> GetLinkClickCountsAsync(Guid userId, CancellationToken cancellationToken = default)
+    {
+        return await context.LinkClicks.Where(lc => lc.Link.UserId == userId).GroupBy(lc => lc.LinkId)
+            .Select(g => new LinkClickCountDto
+            {
+                LinkId = g.Key,
+                ClickCount = g.Count()
+            })
+            .ToListAsync(cancellationToken);
+    }
 
     public async Task AddAsync(Link link, CancellationToken cancellationToken = default)
         => await context.Links.AddAsync(link, cancellationToken);

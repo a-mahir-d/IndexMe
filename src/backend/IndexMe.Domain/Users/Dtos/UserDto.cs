@@ -1,4 +1,4 @@
-﻿using IndexMe.Domain.Links;
+﻿using IndexMe.Domain.Links.Dtos;
 using System.Diagnostics.CodeAnalysis;
 
 namespace IndexMe.Domain.Users.Dtos;
@@ -6,7 +6,7 @@ namespace IndexMe.Domain.Users.Dtos;
 public sealed class UserDto
 {
     [SetsRequiredMembers]
-    private UserDto(string userName, string email, string? displayName, string? bio, DateTime createdAt, ICollection<Link> links)
+    private UserDto(string userName, string email, string? displayName, string? bio, DateTime createdAt, ICollection<LinkDto> links)
     {
         Username = userName;
         Email = email;
@@ -22,7 +22,7 @@ public sealed class UserDto
     public string? DisplayName { get; init; }
     public string? Bio { get; init; }
     public DateTime CreatedAt { get; init; }
-    public ICollection<Link> Links { get; init; }
+    public ICollection<LinkDto> Links { get; init; }
 
     public static UserDto Create(User user)
     {
