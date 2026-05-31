@@ -6,25 +6,25 @@ namespace IndexMe.Domain.LinkClicks.Dtos;
 public sealed class LinkClickDto
 {
     [SetsRequiredMembers]
-    private LinkClickDto(Guid id, DateTime clickedAt, string? ipAddress, string? userAgent)
+    private LinkClickDto(Guid id, DateTime clickedAt, string countryCode, string? userAgent)
     {
         Id = id;
         ClickedAt = clickedAt;
-        IpAddress = ipAddress;
+        CountryCode = countryCode;
         UserAgent = userAgent;
     }
 
     public Guid Id { get; init; }
     public DateTime ClickedAt { get; init; }
-    public string? IpAddress { get; init; }
+    public string CountryCode { get; init; }
     public string? UserAgent { get; init; }
 
-    public static LinkClickDto Create(LinkClick linkClick)
+    public static LinkClickDto Create(LinkClick linkClick, string countryCode)
     {
         return new LinkClickDto(
             id: linkClick.Id,
             clickedAt: linkClick.ClickedAt,
-            ipAddress: linkClick.IpAddress,
+            countryCode: countryCode,
             userAgent: linkClick.UserAgent
         );
     }

@@ -7,7 +7,7 @@ using TS.MediatR;
 
 namespace IndexMe.Application.Features.LinkClicks.Queries.GetClicksByLinkId;
 
-public sealed class GetClicksByLinkIdQueryHandler(ILinkRepository linkRepository, IUserRepository userRepository, ICurrentUserProvider currentUser) : IRequestHandler<GetClicksByLinkIdQuery, Result<List<LinkClickDto>>>
+public sealed class GetClicksByLinkIdQueryHandler(ILinkRepository linkRepository, IGeoIpService geoApiService, IUserRepository userRepository, ICurrentUserProvider currentUser) : IRequestHandler<GetClicksByLinkIdQuery, Result<List<LinkClickDto>>>
 {
     public async Task<Result<List<LinkClickDto>>> Handle(GetClicksByLinkIdQuery request, CancellationToken cancellationToken)
     {
@@ -23,7 +23,8 @@ public sealed class GetClicksByLinkIdQueryHandler(ILinkRepository linkRepository
         List<LinkClickDto> linkClickDtos = [];
         foreach (var linkClick in link.Clicks)
         {
-            linkClickDtos.Add(LinkClickDto.Create(linkClick));
+            var countryCode = await geoApiService.GetCountryCodeAsync(linkClick.IpAddress, cancellationToken);
+            linkClickDtos.Add(LinkClickDto.Create(linkClick, countryCode));
         }
 
         return Result<List<LinkClickDto>>.Success(linkClickDtos);

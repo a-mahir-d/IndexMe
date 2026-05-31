@@ -34,6 +34,7 @@ public static class DependencyInjection
         services.AddSingleton<IClickChannel, ClickChannel>();
 
         services.AddScoped<IJwtService, JwtService>();
+        services.AddHttpClient<IGeoIpService, GeoIpService>();
 
         services.AddHostedService<ClickBackgroundWorker>();
         return services;
