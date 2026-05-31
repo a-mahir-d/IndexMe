@@ -3,7 +3,7 @@ import { Component, inject, signal } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
 import { ThemeService } from '../../../core/services/theme.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +15,7 @@ export class Navbar {
   public themeService = inject(ThemeService);
   public langService = inject(LanguageService);
   public authService = inject(AuthService);
+  public router = inject(Router);
 
   isMobileMenuOpen = signal<boolean>(false);
 
@@ -29,5 +30,10 @@ export class Navbar {
   toggleLanguage(): void {
     const nextLang = this.langService.currentLang() === 'en' ? 'tr' : 'en';
     this.langService.setLanguage(nextLang);
+  }
+
+  logoutAndRedirect() {
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 }

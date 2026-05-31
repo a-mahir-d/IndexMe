@@ -53,5 +53,16 @@
     "addNewLink": "Yeni Link Ekle",
     "cancel": "İptal Et",
     "save": "Kaydet"
+  },
+  "profile": {
+    "profileSettings": "Profil Ayarları",
+    "userName": "Kullanıcı Adı",
+    "displayName": "Profil Adı",
+    "email": "E-Posta",
+    "bio": "Hakkınızda"
+  },
+  "editableFieldComponent": {
+    "save": "Kaydet",
+    "update": "Güncelle"
   }
 }
