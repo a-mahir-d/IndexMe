@@ -7,6 +7,7 @@ import { LinkService } from '../../../core/services/link.service';
 import { ChangeDisplayOrderCommand, CreateLinkCommand } from '../../../core/models/link.models';
 import { AddLinkModal } from '../components/add-link-modal.component'; 
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +19,7 @@ export class Dashboard implements OnInit {
   public langService = inject(LanguageService);
   private userService = inject(UserService);
   private linkService = inject(LinkService);
+  private router = inject(Router);
   
   isModalOpen = signal(false);
   user = signal<UserDto | null>(null);
@@ -25,12 +27,7 @@ export class Dashboard implements OnInit {
   errorMessage: string = '';
 
   ngOnInit() {
-    this.userService.getMyInfo().subscribe({
-      next: (data) => {
-        this.user.set(data);
-        this.loading.set(false);
-      }
-    });
+    this.loadUserData();
   }
 
   openAddLinkModal() { this.isModalOpen.set(true); }
@@ -51,7 +48,16 @@ export class Dashboard implements OnInit {
   }
 
   loadUserData(): void {
-    this.userService.getMyInfo().subscribe(data => this.user.set(data));
+    this.userService.getMyInfo().subscribe({
+      next: (data) => {
+        const sortedLinks = [...data.links].sort((a, b) => a.displayOrder - b.displayOrder);
+        this.user.set({
+          ...data,
+          links: sortedLinks
+        });
+        this.loading.set(false);
+      }
+    });
   }
 
   onDrop(event: CdkDragDrop<any[]>) {
@@ -59,21 +65,33 @@ export class Dashboard implements OnInit {
     const currentIndex = event.currentIndex;
 
     if (prevIndex === currentIndex) return;
+    const originalLinks = [...this.user()!.links];
 
-    const links = [...this.user()!.links];
+    const links = [...originalLinks];
     moveItemInArray(links, prevIndex, currentIndex);
-    this.user.update(u => u ? ({ ...u, links }) : null);
+    
+    const updatedLinks = links.map((link, index) => ({
+      ...link,
+      displayOrder: index + 1
+    }));
 
-    const movedLink = links[currentIndex];
+    this.user.update(u => u ? ({ ...u, links: updatedLinks }) : null);
 
-    const changeDisplayOrderCommand: ChangeDisplayOrderCommand = {linkId: movedLink.id,NewDisplayOrder: currentIndex + 1 };
-    this.linkService.changeDisplayOrder(changeDisplayOrderCommand).subscribe({
-      next: () => {
-        
-      },
+    const movedLink = updatedLinks[currentIndex];
+    const command: ChangeDisplayOrderCommand = {
+      linkId: movedLink.id,
+      NewDisplayOrder: currentIndex + 1
+    };
+
+    this.linkService.changeDisplayOrder(command).subscribe({
       error: (err) => {
-        this.errorMessage = (err.error || 'Bir hata oluştu, lütfen tekrar deneyin.');
+        this.user.update(u => u ? ({ ...u, links: originalLinks }) : null);
+        this.errorMessage = err.error || 'Sıralama güncellenemedi, lütfen tekrar deneyin.';
       }
     });
+  }
+
+  navigateToLink(linkId: string): void {
+    this.router.navigate(['/link'], { queryParams: { id: linkId } });
   }
 }

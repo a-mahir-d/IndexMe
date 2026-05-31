@@ -15,6 +15,6 @@ export class LinkService {
   }
 
   changeDisplayOrder(command: ChangeDisplayOrderCommand): Observable<any> {
-    return this.http.post(`${this.baseUrl}/create`, command);
+    return this.http.patch(`${this.baseUrl}/change-display-order`, command);
   }
 }
