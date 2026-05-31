@@ -19,7 +19,7 @@ public sealed class CreateLinkCommandHandler(ILinkRepository linkRepository, ICu
         var linkCountOfUser = await linkRepository.GetCountByUserIdAsync(user.Id, cancellationToken);
         if (linkCountOfUser >= 30) return Result.Failure($"USER_CANNOT_HAVE_MORE_THAN_{MaxLinkCountPerUser}_LINKS");
 
-        var link = Link.Create(request.Title, request.Url, 0, user);
+        var link = Link.Create(request.Title, request.Url, (byte)(linkCountOfUser + 1), user);
         await linkRepository.AddAsync(link, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 

@@ -11,3 +11,8 @@ export interface CreateLinkCommand {
   title: string;
   url: string;
 }
+
+export interface ChangeDisplayOrderCommand {
+  linkId: string;
+  NewDisplayOrder: number;
+}

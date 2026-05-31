@@ -25,28 +25,42 @@
         {{ langService.translate('dashboard.addLinkButton') }}
       </button>
 
-      <div *ngFor="let link of u.links" class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between shadow-sm">
-        <div class="flex items-center gap-4">
-          <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-xs font-bold text-slate-500">
-            #{{ link.displayOrder }}
-          </div>
-          <div>
-            <h3 class="font-semibold text-slate-900 dark:text-white">{{ link.title }}</h3>
-            <a [href]="link.url" target="_blank" class="text-xs text-indigo-600 dark:text-indigo-400 truncate max-w-[250px] block">
-              {{ link.url }}
-            </a>
-          </div>
-        </div>
-        
-        <div class="flex flex-col items-end">
-          <span class="text-2xl font-black text-slate-900 dark:text-white">
-            {{ link.clickCount }}
-          </span>
-          <span class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">
-            {{ langService.translate('dashboard.clicksLabel') }}
-          </span>
-        </div>
+      <div cdkDropList (cdkDropListDropped)="onDrop($event)" class="space-y-4">
+  
+  <div *ngFor="let link of u.links" 
+       cdkDrag 
+       class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between shadow-sm cursor-grab active:cursor-grabbing">
+    
+    <div class="flex items-center gap-4">
+      <div cdkDragHandle class="text-slate-400 hover:text-indigo-600 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path>
+        </svg>
       </div>
+
+      <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-xs font-bold text-slate-500">
+        #{{ link.displayOrder }}
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-slate-900 dark:text-white">{{ link.title }}</h3>
+        <a [href]="link.url" target="_blank" class="text-xs text-indigo-600 dark:text-indigo-400 truncate max-w-[250px] block">
+          {{ link.url }}
+        </a>
+      </div>
+    </div>
+    
+    <div class="flex flex-col items-end">
+      <span class="text-2xl font-black text-slate-900 dark:text-white">
+        {{ link.clickCount }}
+      </span>
+      <span class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">
+        {{ langService.translate('dashboard.clicksLabel') }}
+      </span>
+    </div>
+
+  </div>
+</div>
       
       <div *ngIf="u.links.length === 0" class="text-center py-10 text-slate-500">
         {{ langService.translate('dashboard.noLinks') }}

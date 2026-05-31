@@ -1,0 +1,40 @@
+<div class="min-h-screen bg-slate-50 dark:bg-slate-950 p-6">
+    <div class="max-w-2xl mx-auto p-6 space-y-6">
+        <h1 class="text-2xl font-bold dark:text-white">{{ langService.translate('profile.profileSettings') }}</h1>
+
+        @if (errorMessage()) {
+            <div class="p-4 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg text-sm">
+            {{ errorMessage() }}
+            </div>
+        }
+
+        <div class="bg-white dark:bg-slate-900 rounded-xl border dark:border-slate-800 p-6 space-y-6">
+            
+            <div>
+            <label class="text-xs font-bold text-slate-500 uppercase">{{ langService.translate('profile.userName') }}</label>
+            <div class="mt-1 p-3 bg-slate-100 dark:bg-slate-800 rounded-lg text-slate-500 dark:text-slate-400 cursor-not-allowed">
+                {{ user()?.username }}
+            </div>
+            </div>
+
+            <app-editable-field 
+            [label]="langService.translate('profile.displayName')"
+            [value]="user()?.displayName" 
+            (save)="updateField('displayName', $event)">
+            </app-editable-field>
+
+            <app-editable-field 
+            [label]="langService.translate('profile.email')"
+            [value]="user()?.email" 
+            (save)="updateField('email', $event)">
+            </app-editable-field>
+
+            <app-editable-field 
+            [label]="langService.translate('profile.bio')" 
+            [value]="user()?.bio" 
+            (save)="updateField('bio', $event)">
+            </app-editable-field>
+
+        </div>
+    </div>
+</div>

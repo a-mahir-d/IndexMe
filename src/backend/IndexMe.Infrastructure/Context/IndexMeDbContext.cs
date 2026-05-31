@@ -31,7 +31,6 @@ public sealed class IndexMeDbContext : DbContext, IUnitOfWork
 
             builder.Property(u => u.Email)
                 .HasConversion(e => e.Value, v => new Email(v))
-                .HasMaxLength(255)
                 .IsRequired();
 
             builder.Property(u => u.Password)

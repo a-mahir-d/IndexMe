@@ -9,3 +9,15 @@ export interface UserDto {
   createdAt: Date;
   links: LinkDto[];
 }
+
+export interface ChangeEmailCommand {
+  newEmail: string;
+}
+
+export interface ChangeDisplayNameCommand {
+  newDisplayName: string;
+}
+
+export interface ChangeBioCommand {
+  newBio: string;
+}
