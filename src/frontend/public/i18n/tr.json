@@ -3,7 +3,8 @@
     "features": "Özellikler",
     "aboutUs": "Hakkımızda",
     "login": "Giriş Yap",
-    "register": "Kayıt Ol"
+    "register": "Kayıt Ol",
+    "logout": "Çıkış Yap"
   },
   "footer": {
     "copyright": "Tüm hakları saklıdır."
@@ -45,6 +46,12 @@
   "dashboard": {
     "linksTitle": "Bağlantılarınız",
     "clicksLabel": "Tıklanma",
-    "noLinks": "Henüz hiç bağlantı eklemediniz."
+    "noLinks": "Henüz hiç bağlantı eklemediniz.",
+    "addLinkButton": "Link Ekle"
+  },
+  "addLinkModal": {
+    "addNewLink": "Yeni Link Ekle",
+    "cancel": "İptal Et",
+    "save": "Kaydet"
   }
 }

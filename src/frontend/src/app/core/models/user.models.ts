@@ -1,18 +1,4 @@
-export interface LinkClickDto {
-  id: string;
-  clickedAt: Date;
-  ipAddress: string | null;
-  userAgent: string | null;
-}
-
-export interface LinkDto {
-  id: string;
-  title: string;
-  url: string;
-  displayOrder: number;
-  createdAt: Date;
-  clickCount: number;
-}
+import { LinkDto } from "./link.models";
 
 export interface UserDto {
   id: string;

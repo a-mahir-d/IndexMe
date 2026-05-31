@@ -1,4 +1,4 @@
-﻿using IndexMe.Domain.Abstractions;
+using IndexMe.Domain.Abstractions;
 using IndexMe.Domain.Exceptions;
 using IndexMe.Domain.Links;
 

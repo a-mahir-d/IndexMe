@@ -3,7 +3,8 @@
     "features": "Features",
     "aboutUs": "About Us",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "logout": "Logout"
   },
   "footer": {
     "copyright": "All rights reserved."
@@ -45,6 +46,12 @@
   "dashboard": {
     "linksTitle": "Your Links",
     "clicksLabel": "Clicks",
-    "noLinks": "You haven't added any links yet."
+    "noLinks": "You haven't added any links yet.",
+    "addLinkButton": "Add Link"
+  },
+  "addLinkModal": {
+    "addNewLink": "Add New Link",
+    "cancel": "Cancel",
+    "save": "Save"
   }
 }

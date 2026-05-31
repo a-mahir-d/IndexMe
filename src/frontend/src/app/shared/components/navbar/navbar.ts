@@ -1,17 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
 import { ThemeService } from '../../../core/services/theme.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
 export class Navbar {
   public themeService = inject(ThemeService);
   public langService = inject(LanguageService);
+  public authService = inject(AuthService);
 
   isMobileMenuOpen = signal<boolean>(false);
 
