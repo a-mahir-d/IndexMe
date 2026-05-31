@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LinkClicksService } from '../../../core/services/link-click.service';
-import { ClickWithCountry, LinkClickDto } from '../../../core/models/link_click.models';
 import { LinkService } from '../../../core/services/link.service';
 import { EditableField } from "../components/editable-field.component";
 import { UAParser } from 'ua-parser-js';
 import { LanguageService } from '../../../core/services/language.service';
+import { LinkClickDto } from '../../../core/models/link_click.models';
 
 @Component({
   selector: 'app-link',
@@ -21,9 +21,10 @@ export class Link implements OnInit {
   langService = inject(LanguageService);
 
   linkData = signal<any>(null);
-  clicks = signal<ClickWithCountry[]>([]);
+  clicks = signal<LinkClickDto[]>([]);
   errorMessage = signal<string | null>(null);
   loading = signal(true);
+  
 
   ngOnInit() {
     const state = history.state;
@@ -53,12 +54,7 @@ export class Link implements OnInit {
   loadClicks() {
     this.clickService.getLinkClicks(this.linkData().id).subscribe({
       next: async (data) => {
-        const processedClicks = await Promise.all(data.map(async (click: any) => ({
-          ...click,
-          countryCode: await this.getCountryFromIp(click.ipAddress)
-        })));
-
-        this.clicks.set(processedClicks);
+        this.clicks.set(data);
         this.loading.set(false);
       },
       error: () => this.loading.set(false)
@@ -108,16 +104,6 @@ export class Link implements OnInit {
       count,
       percentage: Math.round((count / allClicks.length) * 100)
     })).sort((a, b) => b.count - a.count);
-}
-
-  async getCountryFromIp(ip: string): Promise<string> {
-    try {
-      const response = await fetch(`http://ip-api.com/json/${ip}`);
-      const data = await response.json();
-      return data.countryCode || 'XX';
-    } catch {
-      return 'XX';
-    }
   }
 
   getFlagEmoji(countryCode: string) {

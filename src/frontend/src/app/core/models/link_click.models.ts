@@ -1,10 +1,6 @@
 export interface LinkClickDto {
   id: string;
   clickedAt: Date;
-  ipAddress: string | null;
+  countryCode: string;
   userAgent: string | null;
-}
-
-export interface ClickWithCountry extends LinkClickDto {
-  countryCode?: string;
 }
