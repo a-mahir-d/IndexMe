@@ -64,5 +64,15 @@
   "editableFieldComponent": {
     "save": "Save",
     "update": "Update"
+  },
+  "link": {
+    "linkSettings": "Link Settings",
+    "url": "URL",
+    "title": "Title",
+    "totalClick": "Total Clicks",
+    "countryDistribution": "Country Distribution",
+    "deviceDistribution": "Device Distribution",
+    "noData": "No Data",
+    "latestClicks": "Latest Clicks"
   }
 }

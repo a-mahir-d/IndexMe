@@ -43,7 +43,7 @@
             </div>
 
             <div>
-              <h3 (click)="navigateToLink(link.id)" class="font-semibold text-slate-900 dark:text-white cursor-pointer">{{ link.title }}</h3>
+              <h3 (click)="navigateToLink(link)" class="font-semibold text-slate-900 dark:text-white cursor-pointer">{{ link.title }}</h3>
               <a [href]="link.url" target="_blank" class="text-xs text-indigo-600 dark:text-indigo-400 truncate max-w-[250px] block">
                 {{ link.url }}
               </a>

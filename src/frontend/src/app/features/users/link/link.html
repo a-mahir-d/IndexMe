@@ -1,1 +1,94 @@
-<p>link works!</p>
+<div class="min-h-screen bg-slate-50 dark:bg-slate-950 p-6">
+  <div class="max-w-7xl mx-auto">
+    
+    <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 mb-8 space-y-6">
+      <h1 class="text-xl font-bold text-slate-900 dark:text-white mb-4">{{ langService.translate('link.linkSettings') }}</h1>
+      
+      @if (errorMessage()) {
+        <div class="p-3 text-sm text-red-600 bg-red-50 rounded-lg">{{ errorMessage() }}</div>
+      }
+
+      <app-editable-field 
+        label="{{ langService.translate('link.title') }}" 
+        [value]="linkData().title" 
+        (save)="updateLinkField('title', $event)">
+      </app-editable-field>
+
+      <app-editable-field 
+        label="{{ langService.translate('link.url') }}" 
+        [value]="linkData().url" 
+        (save)="updateLinkField('url', $event)">
+      </app-editable-field>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-center">
+        <h3 class="text-slate-500 text-sm font-bold uppercase tracking-wider">{{ langService.translate('link.totalClick') }}</h3>
+        <div class="text-4xl font-black mt-2 text-indigo-600 dark:text-indigo-400">{{ clicks().length }}</div>
+      </div>
+
+      <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <h3 class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-4">{{ langService.translate('link.countryDistribution') }}</h3>
+        <div class="space-y-3">
+          @for (stat of countryStats; track stat.name) {
+            <div class="flex items-center gap-2">
+              <span class="text-lg">{{ getFlagEmoji(stat.name) }}</span>
+              <div class="flex-1">
+                <div class="flex justify-between text-[10px] mb-0.5">
+                  <span class="text-slate-600 dark:text-slate-300">{{ stat.name }}</span>
+                  <span class="font-bold text-slate-900 dark:text-white">{{ stat.percentage }}%</span>
+                </div>
+                <div class="w-full bg-slate-100 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-emerald-500 h-full transition-all duration-500" [style.width.%]="stat.percentage"></div>
+                </div>
+              </div>
+            </div>
+          } @empty {
+            <p class="text-[10px] text-slate-400 italic">{{ langService.translate('link.noData') }}</p>
+          }
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <h3 class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-4">{{ langService.translate('link.deviceDistribution') }}</h3>
+        <div class="space-y-3">
+          @for (stat of userAgentStats; track stat.name) {
+            <div>
+              <div class="flex justify-between text-[10px] mb-0.5">
+                <span class="text-slate-600 dark:text-slate-300">{{ stat.name }}</span>
+                <span class="font-bold text-slate-900 dark:text-white">{{ stat.percentage }}%</span>
+              </div>
+              <div class="w-full bg-slate-100 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-indigo-500 h-full transition-all duration-500" [style.width.%]="stat.percentage"></div>
+              </div>
+            </div>
+          } @empty {
+            <p class="text-[10px] text-slate-400 italic">{{ langService.translate('link.noData') }}</p>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="text-lg font-semibold text-slate-900 dark:text-white">{{ langService.translate('link.latestClicks') }}</h2>
+      
+      @for (click of clicks(); track click.id) {
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 flex justify-between items-center shadow-sm">
+          <div class="flex items-center gap-4">
+            <span class="text-2xl">{{ getFlagEmoji(click.countryCode || 'XX') }}</span>
+            <div class="flex flex-col">
+              <p class="text-sm font-semibold text-slate-900 dark:text-white">{{ click.ipAddress || '?' }}</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">{{ click.clickedAt | date:'medium' }}</p>
+            </div>
+          </div>
+          
+          <div class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 px-3 py-1 rounded-full uppercase tracking-wider">
+            {{ getBrowserFromUA(click.userAgent) }}
+          </div>
+        </div>
+      } @empty {
+        <p class="text-slate-500 py-10 text-center">{{ langService.translate('link.noData') }}</p>
+      }
+    </div>
+  </div>
+</div>

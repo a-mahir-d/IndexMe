@@ -4,7 +4,7 @@ import { LanguageService } from '../../../core/services/language.service';
 import { UserService } from '../../../core/services/user.service';
 import { UserDto } from '../../../core/models/user.models';
 import { LinkService } from '../../../core/services/link.service';
-import { ChangeDisplayOrderCommand, CreateLinkCommand } from '../../../core/models/link.models';
+import { ChangeDisplayOrderCommand, CreateLinkCommand, LinkDto } from '../../../core/models/link.models';
 import { AddLinkModal } from '../components/add-link-modal.component'; 
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
@@ -80,7 +80,7 @@ export class Dashboard implements OnInit {
     const movedLink = updatedLinks[currentIndex];
     const command: ChangeDisplayOrderCommand = {
       linkId: movedLink.id,
-      NewDisplayOrder: currentIndex + 1
+      newDisplayOrder: currentIndex + 1
     };
 
     this.linkService.changeDisplayOrder(command).subscribe({
@@ -91,7 +91,7 @@ export class Dashboard implements OnInit {
     });
   }
 
-  navigateToLink(linkId: string): void {
-    this.router.navigate(['/link'], { queryParams: { id: linkId } });
+  navigateToLink(link: LinkDto): void {
+    this.router.navigate(['/link'], { queryParams: { id: link.id }, state: { linkData: link } });
   }
 }

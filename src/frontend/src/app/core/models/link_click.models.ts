@@ -4,3 +4,7 @@ export interface LinkClickDto {
   ipAddress: string | null;
   userAgent: string | null;
 }
+
+export interface ClickWithCountry extends LinkClickDto {
+  countryCode?: string;
+}

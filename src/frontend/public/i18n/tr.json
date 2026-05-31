@@ -64,5 +64,15 @@
   "editableFieldComponent": {
     "save": "Kaydet",
     "update": "Güncelle"
+  },
+  "link": {
+    "linkSettings": "Bağlantı Ayarları",
+    "url": "Bağlantı Adresi",
+    "title": "Başlık",
+    "totalClick": "Toplam Tıklama",
+    "countryDistribution": "Ülke Dağılımı",
+    "deviceDistribution": "Cihaz Dağılımı",
+    "noData": "Veri Yok",
+    "latestClicks": "Son Tıklamalar"
   }
 }

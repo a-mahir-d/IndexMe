@@ -14,5 +14,15 @@ export interface CreateLinkCommand {
 
 export interface ChangeDisplayOrderCommand {
   linkId: string;
-  NewDisplayOrder: number;
+  newDisplayOrder: number;
+}
+
+export interface ChangeTitleCommand {
+  linkId: string;
+  newTitle: string;
+}
+
+export interface ChangeUrlCommand {
+  linkId: string;
+  newUrl: string;
 }

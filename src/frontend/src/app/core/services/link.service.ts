@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ChangeDisplayOrderCommand, CreateLinkCommand } from '../models/link.models';
+import { ChangeDisplayOrderCommand, ChangeTitleCommand, ChangeUrlCommand, CreateLinkCommand } from '../models/link.models';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +16,13 @@ export class LinkService {
 
   changeDisplayOrder(command: ChangeDisplayOrderCommand): Observable<any> {
     return this.http.patch(`${this.baseUrl}/change-display-order`, command);
+  }
+
+  changeTitle(command: ChangeTitleCommand): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/change-title`, command);
+  }
+
+  changeUrl(command: ChangeUrlCommand): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/change-url`, command);
   }
 }
