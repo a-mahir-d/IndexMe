@@ -1,5 +1,4 @@
 using IndexMe.Domain.Abstractions;
-using IndexMe.Domain.Exceptions;
 using IndexMe.Domain.Links;
 
 namespace IndexMe.Domain.Users;
@@ -44,14 +43,6 @@ public sealed class User : Entity<Guid>
             createdAt: DateTime.UtcNow,
             links: []
         );
-    }
-
-    public void AddLink(string title, string url)
-    {
-        if (Links.Count >= MaxLinkCount) throw new DomainValidationException($"USER_CANNOT_HAVE_MORE_THAN_{MaxLinkCount}_LINKS");
-        byte nextOrder = (byte)(Links.Count + 1);
-        var newLink = Link.Create(title, url, nextOrder, this);
-        Links.Add(newLink);
     }
 
     public void ChangeEmail(string email) => Email = new(email);
