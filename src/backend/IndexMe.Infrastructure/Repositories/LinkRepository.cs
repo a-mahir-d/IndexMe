@@ -7,6 +7,9 @@ namespace IndexMe.Infrastructure.Repositories;
 
 public sealed class LinkRepository(IndexMeDbContext context) : ILinkRepository
 {
+    public async Task<List<Link>> GetAllByUserIdAsync(Guid userId, CancellationToken cancellationToken = default)
+       => await context.Links.Where(l => l.UserId == userId).ToListAsync(cancellationToken);
+
     public async Task<Link?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         => await context.Links.FirstOrDefaultAsync(l => l.Id == id, cancellationToken);
 
@@ -30,6 +33,12 @@ public sealed class LinkRepository(IndexMeDbContext context) : ILinkRepository
     public async Task AddAsync(Link link, CancellationToken cancellationToken = default)
         => await context.Links.AddAsync(link, cancellationToken);
 
+    public async Task ExecuteShiftOrderAsync(Guid userId, int lowBound, int highBound, int shiftAmount, CancellationToken cancellationToken)
+    {
+        await context.Set<Link>()
+            .Where(l => l.UserId == userId && l.DisplayOrder >= lowBound && l.DisplayOrder <= highBound)
+            .ExecuteUpdateAsync(s => s.SetProperty(l => l.DisplayOrder, l => l.DisplayOrder + shiftAmount), cancellationToken);
+    }
     public void Update(Link link) => context.Links.Update(link);
 
     public void Delete(Link link) => context.Links.Remove(link);

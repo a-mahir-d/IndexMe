@@ -16,9 +16,20 @@ public sealed class ChangeDisplayOrderCommandHandler(ILinkRepository linkReposit
         var userId = currentUser.UserId;
         if (link.UserId != userId) return Result.Failure("UNAUTHORIZED_ACCESS_ATTEMPT", $"UNAUTHORIZED_ACCESS_ATTEMPT | User(Id: {userId}) tried to change the display order of the link(Id: {link.Id}) to {request.NewDisplayOrder}");
 
+        byte oldOrder = link.DisplayOrder;
+        int newOrder = request.NewDisplayOrder;
+        if (oldOrder == newOrder) return Result.Success();
 
-        // get all links
-        // update the order
+        if (oldOrder < newOrder)
+        {
+            await linkRepository.ExecuteShiftOrderAsync(userId, lowBound: oldOrder + 1, highBound: newOrder, shiftAmount: -1, cancellationToken);
+        }
+        else
+        {
+            await linkRepository.ExecuteShiftOrderAsync(userId, lowBound: newOrder, highBound: oldOrder - 1, shiftAmount: 1, cancellationToken);
+        }
+
+        link.ChangeDisplayOrder((byte)newOrder);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
