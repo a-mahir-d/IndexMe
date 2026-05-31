@@ -12,6 +12,7 @@ using IndexMe.Infrastructure.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Polly;
 
 namespace IndexMe.Infrastructure;
 
@@ -34,7 +35,7 @@ public static class DependencyInjection
         services.AddSingleton<IClickChannel, ClickChannel>();
 
         services.AddScoped<IJwtService, JwtService>();
-        services.AddHttpClient<IGeoIpService, GeoIpService>();
+        services.AddHttpClient<IGeoIpService, GeoIpService>().AddTransientHttpErrorPolicy(policy => policy.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(500)));
 
         services.AddHostedService<ClickBackgroundWorker>();
         return services;
