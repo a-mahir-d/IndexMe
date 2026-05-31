@@ -6,6 +6,7 @@ public interface ILinkRepository
 {
     Task<List<Link>> GetAllByUserIdAsync(Guid userId, CancellationToken cancellationToken = default);
     Task<Link?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<Link?> GetByIdWithClicksAsync(Guid id, CancellationToken cancellationToken = default);
     Task<IEnumerable<Link>> GetByUserIdAsync(Guid userId, CancellationToken cancellationToken = default);
     Task<byte> GetCountByUserIdAsync(Guid userId, CancellationToken cancellationToken = default);
     Task<List<LinkClickCountDto>> GetLinkClickCountsAsync(Guid userId, CancellationToken ct);

@@ -13,6 +13,9 @@ public sealed class LinkRepository(IndexMeDbContext context) : ILinkRepository
     public async Task<Link?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         => await context.Links.FirstOrDefaultAsync(l => l.Id == id, cancellationToken);
 
+    public async Task<Link?> GetByIdWithClicksAsync(Guid id, CancellationToken cancellationToken = default)
+        => await context.Links.Include(l => l.Clicks).FirstOrDefaultAsync(l => l.Id == id, cancellationToken);
+
     public async Task<IEnumerable<Link>> GetByUserIdAsync(Guid userId, CancellationToken cancellationToken = default)
         => await context.Links.Where(l => l.UserId == userId).ToListAsync(cancellationToken);
 
