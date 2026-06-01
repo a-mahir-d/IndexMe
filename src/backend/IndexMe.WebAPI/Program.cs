@@ -18,6 +18,7 @@ builder.Services.AddMemoryCache();
 builder.Services.AddOptions<JwtSettings>().BindConfiguration("Jwt").ValidateDataAnnotations().ValidateOnStart();
 builder.Services.AddOptions<DbSettings>().BindConfiguration("Db").ValidateDataAnnotations().ValidateOnStart();
 builder.Services.AddOptions<ClientSettings>().BindConfiguration("Client").ValidateDataAnnotations().ValidateOnStart();
+builder.Services.AddOptions<DemoUserSettings>().BindConfiguration("DemoUser").ValidateDataAnnotations().ValidateOnStart();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();

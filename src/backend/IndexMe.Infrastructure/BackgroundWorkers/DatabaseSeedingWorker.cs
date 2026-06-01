@@ -1,15 +1,18 @@
 ﻿using IndexMe.Domain.Links;
 using IndexMe.Domain.Users;
 using IndexMe.Infrastructure.Context;
+using IndexMe.Infrastructure.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace IndexMe.Infrastructure.BackgroundWorkers;
 
-public sealed class DatabaseSeedingWorker(IServiceScopeFactory scopeFactory, ILogger<DatabaseSeedingWorker> logger) : BackgroundService
+public sealed class DatabaseSeedingWorker(IServiceScopeFactory scopeFactory, IOptions<DemoUserSettings> options, ILogger<DatabaseSeedingWorker> logger) : BackgroundService
 {
+    private readonly DemoUserSettings _settings = options.Value;
     private readonly PeriodicTimer _timer = new(TimeSpan.FromHours(1));
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -61,9 +64,9 @@ public sealed class DatabaseSeedingWorker(IServiceScopeFactory scopeFactory, ILo
         }
     }
 
-    private static async Task SeedDummyDataAsync(IndexMeDbContext context, CancellationToken cancellationToken)
+    private async Task SeedDummyDataAsync(IndexMeDbContext context, CancellationToken cancellationToken)
     {
-        var demoUser = User.Create(username: "john_doe", email: "john_doe@indexme.com", password: "u9IFRZyZlgZFTuO7h6YCe", displayName: "John Doe", bio: "The best person in the world at being anonymous");
+        var demoUser = User.Create(username: "john_doe", _settings.Email, password: _settings.Password, displayName: "John Doe", bio: "The best person in the world at being anonymous");
         var link1 = Link.Create(title: "Github", url: "https://github.com/", displayOrder: 1, user: demoUser);
         var link2 = Link.Create(title: "LinkedIn", url: "https://www.linkedin.com/", displayOrder: 2, user: demoUser);
         var link3 = Link.Create(title: "Instagram", url: "https://www.instagram.com/", displayOrder: 3, user: demoUser);
