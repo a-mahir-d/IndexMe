@@ -4,7 +4,9 @@
     "aboutUs": "About Us",
     "login": "Login",
     "register": "Register",
-    "logout": "Logout"
+    "logout": "Logout",
+    "profile": "Profile",
+    "dashboard": "Dashboard"
   },
   "footer": {
     "copyright": "All rights reserved."

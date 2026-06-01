@@ -4,7 +4,9 @@
     "aboutUs": "Hakkımızda",
     "login": "Giriş Yap",
     "register": "Kayıt Ol",
-    "logout": "Çıkış Yap"
+    "logout": "Çıkış Yap",
+    "profile": "Profil",
+    "dashboard": "Panel"
   },
   "footer": {
     "copyright": "Tüm hakları saklıdır."
