@@ -40,10 +40,7 @@ public class UsersController(ISender sender) : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> Register(RegisterUserCommand request, CancellationToken cancellationToken)
     {
-        var result = await sender.Send(request, cancellationToken);
-
-        if (result.IsSuccess) return Ok();
-        else return BadRequest(result.Error);
+        return BadRequest("Şuanda bu işleme izin verilmemektedir | This process is not allowed right now");
     }
 
     [HttpPost("login")]
@@ -59,36 +56,24 @@ public class UsersController(ISender sender) : ControllerBase
     [HttpPatch("change-password")]
     public async Task<IActionResult> ChangePassword(ChangePasswordCommand request, CancellationToken cancellationToken)
     {
-        var result = await sender.Send(request, cancellationToken);
-
-        if (result.IsSuccess) return Ok();
-        else return BadRequest(result.Error);
+        return BadRequest("Şuanda bu işleme izin verilmemektedir | This process is not allowed right now");
     }
 
     [HttpPatch("change-email")]
     public async Task<IActionResult> ChangeEmail(ChangeEmailCommand request, CancellationToken cancellationToken)
     {
-        var result = await sender.Send(request, cancellationToken);
-
-        if (result.IsSuccess) return Ok();
-        else return BadRequest(result.Error);
+        return BadRequest("Şuanda bu işleme izin verilmemektedir | This process is not allowed right now");
     }
 
     [HttpPatch("change-display-name")]
     public async Task<IActionResult> ChangeDisplayName(ChangeDisplayNameCommand request, CancellationToken cancellationToken)
     {
-        var result = await sender.Send(request, cancellationToken);
-
-        if (result.IsSuccess) return Ok();
-        else return BadRequest(result.Error);
+        return BadRequest("Şuanda bu işleme izin verilmemektedir | This process is not allowed right now");
     }
 
     [HttpPatch("change-bio")]
     public async Task<IActionResult> ChangeBio(ChangeBioCommand request, CancellationToken cancellationToken)
     {
-        var result = await sender.Send(request, cancellationToken);
-
-        if (result.IsSuccess) return Ok();
-        else return BadRequest(result.Error);
+        return BadRequest("Şuanda bu işleme izin verilmemektedir | This process is not allowed right now");
     }
 }

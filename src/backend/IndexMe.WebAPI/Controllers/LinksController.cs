@@ -28,28 +28,19 @@ public class LinksController(ISender sender) : ControllerBase
     [HttpPost("create")]
     public async Task<IActionResult> Create(CreateLinkCommand request, CancellationToken cancellationToken)
     {
-        var result = await sender.Send(request, cancellationToken);
-
-        if (result.IsSuccess) return Ok();
-        else return BadRequest(result.Error);
+        return BadRequest("Şuanda bu işleme izin verilmemektedir | This process is not allowed right now");
     }
 
     [HttpPatch("change-url")]
     public async Task<IActionResult> ChangeUrl(ChangeUrlCommand request, CancellationToken cancellationToken)
     {
-        var result = await sender.Send(request, cancellationToken);
-
-        if (result.IsSuccess) return Ok();
-        else return BadRequest(result.Error);
+        return BadRequest("Şuanda bu işleme izin verilmemektedir | This process is not allowed right now");
     }
 
     [HttpPatch("change-title")]
     public async Task<IActionResult> ChangeTitle(ChangeTitleCommand request, CancellationToken cancellationToken)
     {
-        var result = await sender.Send(request, cancellationToken);
-
-        if (result.IsSuccess) return Ok();
-        else return BadRequest(result.Error);
+        return BadRequest("Şuanda bu işleme izin verilmemektedir | This process is not allowed right now");
     }
 
     [HttpPatch("change-display-order")]
