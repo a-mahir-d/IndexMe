@@ -2,11 +2,12 @@ import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ChangeBioCommand, ChangeDisplayNameCommand, ChangeEmailCommand, UserDto, UserPublicDto } from '../models/user.models';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
   private http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:5000/api/users';
+  private readonly baseUrl = `${environment.serverUrl}/users`;
   
   getMyInfo(): Observable<UserDto> {
     return this.http.get<UserDto>(`${this.baseUrl}/get-my-info`);

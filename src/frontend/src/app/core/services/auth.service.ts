@@ -2,6 +2,8 @@ import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { LoginCredentials } from '../models/auth.models';
+import { prod } from '../../../environments/prod';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +11,7 @@ import { LoginCredentials } from '../models/auth.models';
 export class AuthService {
   private http = inject(HttpClient);
   private readonly tokenKey = 'idx_token';
+  private readonly baseUrl = `${environment.serverUrl}/users`;
 
   // Manage login state reactively with Signals
   private tokenSignal = signal<string | null>(
@@ -18,7 +21,7 @@ export class AuthService {
   public isAuthenticated = signal<boolean>(!!this.tokenSignal());
 
   login(credentials: LoginCredentials): Observable<string> {
-    return this.http.post<string>('http://localhost:5000/api/users/login', credentials, { responseType: 'text' as 'json' }).pipe(
+    return this.http.post<string>(`${this.baseUrl}/login`, credentials, { responseType: 'text' as 'json' }).pipe(
       tap((token) => {
         if (typeof window !== 'undefined') {
           localStorage.setItem(this.tokenKey, token);
