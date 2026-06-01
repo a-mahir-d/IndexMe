@@ -43,7 +43,6 @@ export class PublicProfile implements OnInit {
         this.isLoading.set(false);
       },
       error: (err) => {
-        this.errorMessage.set('Kullanıcı bulunamadı veya bir hata oluştu.');
         this.isLoading.set(false);
       }
     });
