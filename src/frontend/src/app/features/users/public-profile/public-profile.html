@@ -1,0 +1,52 @@
+<div class="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 flex flex-col items-center p-6 transition-colors duration-300">
+  
+  @if (isLoading()) {
+    <div class="flex flex-col items-center justify-center flex-1">
+      <div class="w-10 h-10 border-4 border-purple-600 dark:border-purple-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+      <p class="text-slate-500 dark:text-slate-400 text-sm font-medium animate-pulse">{{ langService.translate('publicProfile.loadingProfile') }}</p>
+    </div>
+  }
+  
+  @else if (errorMessage()) {
+    <div class="flex flex-col items-center justify-center flex-1 text-center max-w-sm">
+      <div class="bg-red-100 dark:bg-red-950/30 p-4 rounded-full text-red-600 dark:text-red-400 mb-4 text-2xl">⚠️</div>
+      <h2 class="text-xl font-bold text-red-600 dark:text-red-400 mb-1">{{ langService.translate('publicProfile.couldntLoadProfile') }}</h2>
+      <p class="text-slate-500 dark:text-slate-400 text-sm">{{ errorMessage() }}</p>
+    </div>
+  }
+  
+  @else if (userProfile(); as profile) {
+    <div class="w-full max-w-xl flex flex-col items-center mt-12">
+      
+      <div class="w-24 h-24 bg-linear-to-tr from-purple-600 to-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-3xl mb-4 shadow-xl shadow-purple-500/10 dark:shadow-purple-950/30">
+        {{ profile.displayName.charAt(0).toUpperCase() }}
+      </div>
+        
+      <h1 class="text-2xl font-black text-slate-900 dark:text-white mb-1">{{ profile.displayName }}</h1>
+      <p class="text-sm text-indigo-600 dark:text-indigo-400 font-mono mb-4">{{ '@' + profile.username }}</p>
+
+      @if (profile.bio) {
+        <p class="text-center text-slate-600 dark:text-slate-300 max-w-sm mb-8 text-sm leading-relaxed px-4">
+          {{ profile.bio }}
+        </p>
+      }
+
+      <div class="w-full space-y-4 px-2">
+        @for (link of profile.links; track link.id) {
+          <button
+            (click)="onLinkClick(link.id)"
+            class="w-full py-4 px-6 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-semibold text-center rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-xs hover:border-purple-500 dark:hover:border-purple-400 hover:shadow-md active:scale-[0.99] transition-all duration-200 block focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer"
+          >
+            {{ link.title }}
+          </button>
+        } @empty {
+          <div class="text-center py-12 text-slate-400 dark:text-slate-500 border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl w-full">
+            <p class="text-sm">{{ langService.translate('publicProfile.noData') }}</p>
+          </div>
+        }
+      </div>
+
+    </div>
+  }
+  
+</div>

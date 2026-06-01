@@ -1,4 +1,4 @@
-import { LinkDto } from "./link.models";
+import { LinkDto, LinkPublicDto } from "./link.models";
 
 export interface UserDto {
   id: string;
@@ -8,6 +8,13 @@ export interface UserDto {
   bio: string | null;
   createdAt: Date;
   links: LinkDto[];
+}
+
+export interface UserPublicDto {
+  username: string;
+  displayName: string;
+  bio: string | null;
+  links: LinkPublicDto[];
 }
 
 export interface ChangeEmailCommand {

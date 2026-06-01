@@ -74,5 +74,10 @@
     "deviceDistribution": "Device Distribution",
     "noData": "No Data",
     "latestClicks": "Latest Clicks"
+  },
+  "publicProfile": {
+    "loadingProfile": "Loading Profile",
+    "couldntLoadProfile": "Couldn't Load Profile",
+    "noData": "No Data"
   }
 }

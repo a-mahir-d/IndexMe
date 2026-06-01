@@ -6,7 +6,7 @@ namespace IndexMe.Domain.Users.Dtos;
 public sealed class UserPublicDto
 {
     [SetsRequiredMembers]
-    private UserPublicDto(string userName, string? displayName, string? bio, ICollection<LinkPublicDto> userLinksPublicDtos)
+    private UserPublicDto(string userName, string displayName, string? bio, ICollection<LinkPublicDto> userLinksPublicDtos)
     {
         Username = userName;
         DisplayName = displayName;
@@ -15,7 +15,7 @@ public sealed class UserPublicDto
     }
 
     public string Username { get; init; }
-    public string? DisplayName { get; init; }
+    public string DisplayName { get; init; }
     public string? Bio { get; init; }
     public ICollection<LinkPublicDto> Links { get; init; }
 

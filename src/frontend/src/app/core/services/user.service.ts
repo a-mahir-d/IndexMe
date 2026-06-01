@@ -1,7 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ChangeBioCommand, ChangeDisplayNameCommand, ChangeEmailCommand, UserDto } from '../models/user.models';
+import { ChangeBioCommand, ChangeDisplayNameCommand, ChangeEmailCommand, UserDto, UserPublicDto } from '../models/user.models';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -10,6 +10,11 @@ export class UserService {
   
   getMyInfo(): Observable<UserDto> {
     return this.http.get<UserDto>(`${this.baseUrl}/get-my-info`);
+  }
+
+  getUserInfo(username: string): Observable<UserPublicDto> {
+    const params = new HttpParams().set('username', username);
+    return this.http.get<UserPublicDto>(`${this.baseUrl}/get-user-info`, { params });
   }
 
   updateEmail(command: ChangeEmailCommand): Observable<void> {

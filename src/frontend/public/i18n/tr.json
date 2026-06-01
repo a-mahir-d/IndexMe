@@ -74,5 +74,10 @@
     "deviceDistribution": "Cihaz Dağılımı",
     "noData": "Veri Yok",
     "latestClicks": "Son Tıklamalar"
+  },
+  "publicProfile": {
+    "loadingProfile": "Profil Yükleniyor",
+    "couldntLoadProfile": "Profil Yüklenemedi",
+    "noData": "Veri Yok"
   }
 }

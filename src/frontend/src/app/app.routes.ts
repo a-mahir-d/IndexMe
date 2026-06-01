@@ -6,6 +6,7 @@ import { Features } from './shared/components/features/features';
 import { Dashboard } from './features/users/dashboard/dashboard';
 import { Profile } from './features/users/profile/profile';
 import { Link } from './features/users/link/link';
+import { PublicProfile } from './features/users/public-profile/public-profile';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -15,4 +16,5 @@ export const routes: Routes = [
     { path: 'dashboard', component: Dashboard },
     { path: 'profile', component: Profile },
     { path: 'link', component: Link },
+    { path: ':username', component: PublicProfile } 
 ];

@@ -17,7 +17,7 @@ public sealed class TrackClickQueryHandler(ILinkRepository linkRepository, ICurr
         var ipAddress = currentUser.Ip;
         var userAgent = currentUser.UserAgent;
 
-        var click = LinkClick.Create(ipAddress, userAgent, link);
+        var click = LinkClick.Create(link.Id, ipAddress, userAgent);
 
         await clickChannel.WriteAsync(click, cancellationToken);
 

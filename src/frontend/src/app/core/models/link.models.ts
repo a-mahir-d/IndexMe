@@ -7,6 +7,12 @@ export interface LinkDto {
   clickCount: number;
 }
 
+export interface LinkPublicDto {
+  id: string;
+  title: string;
+  displayOrder: number;
+}
+
 export interface CreateLinkCommand {
   title: string;
   url: string;
