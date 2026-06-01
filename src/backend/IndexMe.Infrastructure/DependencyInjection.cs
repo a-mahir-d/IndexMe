@@ -38,6 +38,7 @@ public static class DependencyInjection
         services.AddHttpClient<IGeoIpService, GeoIpService>().AddTransientHttpErrorPolicy(policy => policy.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(500)));
 
         services.AddHostedService<ClickBackgroundWorker>();
+        services.AddHostedService<MigrationHostedService>();
         return services;
     }
 }

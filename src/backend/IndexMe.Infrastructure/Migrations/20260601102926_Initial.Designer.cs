@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace IndexMe.Infrastructure.Migrations
 {
     [DbContext(typeof(IndexMeDbContext))]
-    [Migration("20260530112557_Initial")]
+    [Migration("20260601102926_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -97,8 +97,7 @@ namespace IndexMe.Infrastructure.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Password")
                         .IsRequired()
