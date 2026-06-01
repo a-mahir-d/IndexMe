@@ -5,6 +5,7 @@ using IndexMe.Domain.LinkClicks;
 using IndexMe.Domain.Links;
 using IndexMe.Domain.Users;
 using IndexMe.Infrastructure.Analytics;
+using IndexMe.Infrastructure.BackgroundWorkers;
 using IndexMe.Infrastructure.Context;
 using IndexMe.Infrastructure.Repositories;
 using IndexMe.Infrastructure.Services;
@@ -39,6 +40,7 @@ public static class DependencyInjection
 
         services.AddHostedService<ClickBackgroundWorker>();
         services.AddHostedService<MigrationHostedService>();
+        services.AddHostedService<DatabaseSeedingWorker>();
         return services;
     }
 }
