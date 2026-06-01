@@ -1,3 +1,3 @@
 export const prod = {
-  serverUrl: '/api'
+  serverUrl: 'https://indexme.onrender.com/api'
 };
