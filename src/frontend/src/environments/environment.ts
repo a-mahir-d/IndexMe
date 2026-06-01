@@ -5,5 +5,5 @@ import { prod } from './prod';
 const env = dev;
 
 export const environment = {
-  serverUrl: prod.serverUrl
+  serverUrl: env.serverUrl
 };
