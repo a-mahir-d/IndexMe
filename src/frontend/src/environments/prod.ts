@@ -1,3 +1,3 @@
 export const prod = {
-  serverUrl: 'https://indexme.onrender.com/api'
+  serverUrl: 'https://indexme-urp9.onrender.com/api'
 };
