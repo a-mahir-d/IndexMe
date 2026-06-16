@@ -19,7 +19,7 @@
 * **Tailwind CSS v4:** Mobil öncelikli (responsive), modern ve minimalist kullanıcı açılış sayfaları.
 * **Component-Driven Design:** Kod tekrarını önleyen, özelleştirilebilir link ve profil kartı bileşenleri.
 
-### 🇺🇸 English
+### English
 ### Backend (.NET 10)
 * **Clean Architecture:** Separated into Domain, Application, Infrastructure, and WebAPI layers for a loosely coupled, and maintainable codebase.
 * **Rich Domain Driven Design (DDD):** Encapsulated business logic and validation constraints within domain entities.
@@ -40,7 +40,7 @@
 * **Dinamik Profil Sayfaları:** Kullanıcıların eklediği bağlantılar, display order (sıralama) ve aktiflik durumlarına göre dinamik olarak render edilir.
 * **Bulut Dağıtımı:** Sistem kaynaklarını optimize etmek ve tam uyumluluk sağlamak adına frontend mimarisi **Vercel** üzerinde, backend API servisleri ise **Render** üzerinde barındırılır.
 
-### 🇺🇸 English
+### English
 * **Rich Domain Encapsulation:** Domain entities enforce business rules and URL validation upon initialization, preventing invalid structural states across the system.
 * **Dynamic Landing Pages:** User-defined custom social and web links are dynamically rendered on the public view based on display orders and active status.
 * **Cloud Deployment:** For optimal resource scaling, the frontend application is hosted on **Vercel**, while the backend production API is deployed on **Render**.
